@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Career Path Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Career Path Visualizer</h1>
+    <p>Discover your ideal career path using AI-powered analysis.</p>
+</header>
+
+<section class="container">
+
+    <form id="resumeForm">
+        <label for="resume">Upload Resume (PDF or Text):</label>
+        <input type="file" id="resume" name="resume" accept=".pdf,.txt">
+
+        <label for="skills">Your Skills (comma separated):</label>
+        <input type="text" id="skills" placeholder="Python, SQL, React">
+
+        <button type="submit">Analyze My Career Path</button>
+    </form>
+
+</section>
+
+<script>
+document.getElementById("resumeForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("resume", document.getElementById("resume").files[0]);
+    formData.append("skills", document.getElementById("skills").value);
+
+    const response = await fetch("/analyze", {
+        method: "POST",
+        body: formData
+    });
+
+    const result = await response.json();
+    window.location.href = `/results.html?user=${result.user_id}`;
+});
+</script>
+
+</body>
+</html>

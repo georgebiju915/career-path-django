@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Career Recommendations</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Your Career Path Results</h1>
+</header>
+
+<div class="container">
+    <h2>Recommended Career Roles</h2>
+    <ul id="roles"></ul>
+
+    <h2>Skill Gaps</h2>
+    <ul id="gaps"></ul>
+
+    <h2>Your Career Roadmap</h2>
+    <div id="roadmap-graph"></div> <!-- D3.js graph -->
+</div>
+
+<script>
+async function loadResults() {
+    const params = new URLSearchParams(window.location.search);
+    const userId = params.get("user");
+
+    const response = await fetch(`/results/${userId}`);
+    const data = await response.json();
+
+    // Roles
+    data.recommended_roles.forEach(r => {
+        document.getElementById("roles").innerHTML += `<li>${r}</li>`;
+    });
+
+    // Skill gaps
+    data.skill_gaps.forEach(g => {
+        document.getElementById("gaps").innerHTML += `<li>${g}</li>`;
+    });
+
+    // TODO: Render graph using D3
+}
+loadResults();
+</script>
+
+</body>
+</html>

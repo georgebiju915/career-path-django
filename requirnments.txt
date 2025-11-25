@@ -1,0 +1,12 @@
+Django>=4.2
+djangorestframework
+mysqlclient
+sqlalchemy
+neo4j
+celery[redis]
+redis
+requests
+beautifulsoup4
+python-dotenv
+openai
+psycopg

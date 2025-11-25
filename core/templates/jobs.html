@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recommended Jobs</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Job Recommendations</h1>
+</header>
+
+<div class="container">
+    <div id="job-list"></div>
+</div>
+
+<script>
+async function loadJobs() {
+    const response = await fetch("/jobs");
+    const jobs = await response.json();
+
+    jobs.forEach(job => {
+        const card = `
+            <div class="job-card">
+                <h3>${job.title}</h3>
+                <p>${job.company}</p>
+                <a href="${job.url}" target="_blank">View Job</a>
+            </div>
+        `;
+        document.getElementById("job-list").innerHTML += card;
+    });
+}
+loadJobs();
+</script>
+
+</body>
+</html>
