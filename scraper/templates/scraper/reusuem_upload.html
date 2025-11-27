@@ -1,0 +1,17 @@
+{% extends "scraper/base.html" %}
+{% load static %}
+{% block content %}
+  <h1>Upload/Paste Resume (testing)</h1>
+  <div class="card mb-3">
+    <div class="card-body">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Upload & Parse</button>
+      </form>
+    </div>
+  </div>
+
+  <h4>Quick notes</h4>
+  <p>You can paste resume text or upload a simple text/pdf. The parser used for demo is basic — replace with spaCy or a PDF extractor in production.</p>
+{% endblock %}

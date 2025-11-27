@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "core",
     "api",
+    "scraper"
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,4 @@ NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "test")
 # OpenAI
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+APP_DIRS = True

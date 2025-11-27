@@ -1,0 +1,21 @@
+{% extends "scraper/base.html" %}
+{% block content %}
+  <h1>Parsed Resume</h1>
+  <div class="card">
+    <div class="card-body">
+      <h5>Uploaded at: {{ resume.uploaded_at }}</h5>
+      <h5>Parsed fields</h5>
+      <pre>{{ resume.parsed|json_script:"parsed" }}</pre>
+      <h5>Detected skills</h5>
+      <ul>
+        {% for s in resume.parsed.skills %}
+          <li>{{ s }}</li>
+        {% empty %}
+          <li><em>No skills detected</em></li>
+        {% endfor %}
+      </ul>
+      <h5>Raw text (first 1000 chars)</h5>
+      <pre>{{ resume.raw_text|slice:":1000" }}</pre>
+    </div>
+  </div>
+{% endblock %}

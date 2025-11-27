@@ -1,0 +1,31 @@
+{% extends "scraper/base.html" %}
+{% block content %}
+  <h1>Skill Trends (demo)</h1>
+
+  <h4>Top skills (by frequency)</h4>
+  <ol>
+    {% for skill, count in top_skills %}
+      <li>{{ skill }} — {{ count }} postings</li>
+    {% empty %}
+      <li>No data yet.</li>
+    {% endfor %}
+  </ol>
+
+  <h4>Course recommendations for top skills</h4>
+  {% for skill, courses in recommendations.items %}
+    <div class="card mb-2">
+      <div class="card-body">
+        <h5>{{ skill }}</h5>
+        {% if courses %}
+          <ul>
+            {% for c in courses %}
+              <li><a href="{{ c.url }}" target="_blank">{{ c.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No curated courses found for this skill in demo mapping.</p>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}

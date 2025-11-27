@@ -1,0 +1,19 @@
+{% extends "scraper/base.html" %}
+{% block content %}
+  <h1>Scrape Results</h1>
+  <p>Showing latest scraped postings (demo).</p>
+  <div class="list-group">
+    {% for p in postings %}
+      <a class="list-group-item list-group-item-action" href="{{ p.url }}" target="_blank">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ p.title }}</h5>
+          <small>{{ p.created_at }}</small>
+        </div>
+        <p class="mb-1">{{ p.parsed.description|default:"(no description)"|truncatechars:200 }}</p>
+        <small>Company: {{ p.company }}</small>
+      </a>
+    {% empty %}
+      <div class="alert alert-info">No postings yet. Run the scraper to populate results.</div>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "scraper/base.html" %}
+{% block content %}
+  <h1>Run Scraper (testing)</h1>
+  <div class="card mb-3">
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success" type="submit">Start Scrape</button>
+      </form>
+    </div>
+  </div>
+
+  <p>Note: This demo enqueues a Celery task named run_naukri_scrape if Celery is configured. If not, a ScrapeRun placeholder will be created.</p>
+{% endblock %}
