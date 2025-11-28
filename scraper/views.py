@@ -6,6 +6,7 @@ from .utils.resume_parser import parse_resume_text, extract_text_from_pdf
 from .models import ResumeProfile, JobPosting, ScrapeRun, Company  # models assumed from earlier plan
 from .tasks import run_naukri_scrape  # celery task from earlier plan (if exists)
 import io
+from .utils.resume_parser import parse_resume_from_upload
 
 def upload_resume(request):
     form = ResumeUploadForm(request.POST or None, request.FILES or None)
@@ -22,8 +23,12 @@ def upload_resume(request):
                     text = f.read().decode("utf-8", errors="ignore")
                 except Exception:
                     text = ""
-        parsed = parse_resume_text(text or "")
-        rp = ResumeProfile.objects.create(user_identifier="manual_test", raw_text=text or "", parsed=parsed)
+        parsed_result = parse_resume_from_upload(f)
+        rp = ResumeProfile.objects.create(
+            user_identifier="manual_test",
+              raw_text=parsed_result["extracted_text"][:10000],
+              parsed=parsed_result
+              )
         messages.success(request, "Resume uploaded and parsed.")
         return redirect(reverse("scraper:resume_detail", kwargs={"pk": rp.pk}))
     return render(request, "scraper/resume_upload.html", {"form": form})

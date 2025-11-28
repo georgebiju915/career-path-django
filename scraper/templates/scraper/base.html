@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Career Path - Demo</title>
+    <title>Career Path — Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CDN for quick testing -->
+    {% load static %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{% static 'scraper/styles.css' %}" rel="stylesheet">
   </head>
@@ -12,14 +12,12 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
       <div class="container">
         <a class="navbar-brand" href="{% url 'scraper:upload_resume' %}">CareerPath Demo</a>
-        <div>
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item"><a class="nav-link" href="{% url 'scraper:upload_resume' %}">Upload Resume</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'scraper:scrape_run' %}">Run Scraper</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'scraper:scrape_results' %}">Scrape Results</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'scraper:trends' %}">Trends</a></li>
-          </ul>
-        </div>
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="{% url 'scraper:upload_resume' %}">Upload Resume</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'scraper:scrape_run' %}">Run Scraper</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'scraper:scrape_results' %}">Scrape Results</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'scraper:trends' %}">Trends</a></li>
+        </ul>
       </div>
     </nav>
 
@@ -31,7 +29,6 @@
       {% endif %}
       {% block content %}{% endblock %}
     </main>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
